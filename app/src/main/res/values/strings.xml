@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="movie_detail">Movie Detail</string>
+
+    <string name="releaseDate">Release date: </string>
+    <string name="ratingsOutOf">/10</string>
+    <!-- Menu strings -->
+    <string name="sort_by">Sort By</string>
+    <string name="sort_by_popularity">Popularity</string>
+    <string name="sort_by_rating">Rating</string>
+
+   <!-- Error messages -->
+    <string name="error_message">Something went wrong while fetching data, please try again.</string>
+</resources>

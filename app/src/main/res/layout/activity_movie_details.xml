@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="3"
+    android:orientation="horizontal"
+    android:rowCount="6">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnSpan="3"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:id="@+id/tv_movie_title"
+        android:paddingStart="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@android:color/darker_gray"
+        android:layout_columnSpan="3"/>
+
+    <ImageView android:id="@+id/iv_movie_thumbnail"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_columnSpan="2"
+        android:layout_rowSpan="2"
+        android:contentDescription="Movie poster thumbnail"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp" />
+
+    <TextView android:id="@+id/tv_release_date"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView android:id="@+id/tv_user_rating"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"/>
+
+
+
+    <TextView android:id="@+id/tv_overview"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="17dp"
+        android:layout_columnSpan="3"
+        style="@style/TextAppearance.AppCompat.Medium"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@android:color/darker_gray"
+        android:layout_columnSpan="3"/>
+</GridLayout>
