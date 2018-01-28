@@ -46,7 +46,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_rowSpan="2"
-                android:contentDescription="Movie poster thumbnail"
+                android:contentDescription="@string/moviePosterThumbnail"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movie_title" />
 
@@ -62,7 +62,9 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/nsv_overview"
                 app:layout_constraintStart_toEndOf="@+id/iv_movie_thumbnail"
-                app:layout_constraintTop_toBottomOf="@+id/tv_movie_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_movie_title"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="28dp" />
 <android.support.v4.widget.NestedScrollView
     android:id="@+id/nsv_overview"
     android:layout_width="0dp"
@@ -93,7 +95,8 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/tv_release_date"
                 app:layout_constraintStart_toStartOf="@+id/tv_release_date"
-                app:layout_constraintTop_toBottomOf="@+id/tv_release_date" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_release_date"
+                android:layout_marginRight="8dp" />
 
             <ToggleButton
                 android:id="@+id/b_is_favourite"
@@ -122,10 +125,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Trailers"
+                android:text="@string/trailers"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view2" />
+                app:layout_constraintTop_toTopOf="@+id/view2"
+                android:layout_marginLeft="16dp" />
 
             <LinearLayout
                 android:id="@+id/ll_trailer_items"

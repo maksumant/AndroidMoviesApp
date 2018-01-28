@@ -5,6 +5,13 @@
 
     <string name="releaseDate">Release date: </string>
     <string name="ratingsOutOf">/10</string>
+    <string name="moviePoster">Movie poster</string>
+    <string name="moviePosterThumbnail">Movie poster thumbnail</string>
+    <string name="trailers">Trailers</string>
+
+
+
+
     <!-- Menu strings -->
     <string name="sort_by">Sort By</string>
     <string name="sort_by_popularity">Popularity</string>
