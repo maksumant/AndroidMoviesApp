@@ -23,6 +23,10 @@ public class NetworkUtils {
             "https://api.themoviedb.org/3";
     private static final String API_TO_USE = "movie/";
 
+    private static final String PATH_VIDEOS = "videos";
+
+    private static final String PATH_REVIEWS = "reviews";
+
     private static final String API_KEY = "api_key";
 
     private static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
@@ -31,11 +35,10 @@ public class NetworkUtils {
 
 
     //TODO: Enter your API KEY before running app.
-    private static final String API_KEY_VALUE = "<<ENTER YOUR API KEY HERE>>";
+    private static final String API_KEY_VALUE = "<<api keu >>";
 
     /**
-     * Builds the URL used to talk to the weather server using a location. This location is based
-     * on the query capabilities of the weather provider that we are using.
+     * Builds the URL used to talk to the movies DB API server using a sort by parameter.
      *
      * @param sortBy
      * @return The URL to use to query the weather server.
@@ -58,8 +61,81 @@ public class NetworkUtils {
     }
 
     /**
-     * Builds the URL used to talk to the weather server using a location. This location is based
-     * on the query capabilities of the weather provider that we are using.
+     * Builds the URL used to talk to the movies DB API server using a movie ID parameter.
+     *
+     * @param movieId
+     * @return The URL
+     */
+    public static URL buildUrlToGetMovieDetails(Long movieId) {
+        Uri builtUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon().appendEncodedPath(API_TO_USE).appendEncodedPath(String.valueOf(movieId))
+                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI " + url);
+
+        return url;
+    }
+
+    /**
+     * Builds the URL used to talk to the movies DB API server using a movie ID parameter.
+     * *
+     * @param movieId
+     * @return The URL to use to query the weather server.
+     */
+    public static URL buildUrlForTrailers(String movieId) {
+        Uri builtUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon().appendEncodedPath(API_TO_USE)
+                .appendEncodedPath(movieId)
+                .appendEncodedPath(PATH_VIDEOS)
+                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI for videos:" + url);
+
+        return url;
+    }
+
+    /**
+     * Builds the URL used to talk to the movies DB API server using a movie ID parameter.
+     * *
+     * @param movieId
+     * @return The URL to use to query the weather server.
+     */
+    public static URL buildUrlForReviews(String movieId) {
+        Uri builtUri = Uri.parse(THE_MOVIE_DB_BASE_URL).buildUpon().appendEncodedPath(API_TO_USE)
+                .appendEncodedPath(movieId)
+                .appendEncodedPath(PATH_REVIEWS)
+                .appendQueryParameter(API_KEY, API_KEY_VALUE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        Log.v(TAG, "Built URI for videos:" + url);
+
+        return url;
+    }
+
+
+    /**
+     * Builds the URL used to talk to the movies DB API server using relative poster path.
      *
      * @param relativePosterPath
      * @return The URL to use to query the weather server.

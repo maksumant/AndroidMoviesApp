@@ -1,5 +1,8 @@
 package com.mymovies.android.popularmovies.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +10,7 @@ import java.io.Serializable;
  * Created by makrandsumant on 16/12/17.
  */
 
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
 
     private String id;
     private String title;
@@ -16,7 +19,52 @@ public class Movie implements Serializable {
     private String overview;
     private String releaseDate;
     private String userRating;
+    private boolean isFavourite;
+    private Long favouritesDbId;
 
+    protected Movie(Parcel in) {
+        id = in.readString();
+        title = in.readString();
+        originalTitle = in.readString();
+        relativePosterPath = in.readString();
+        overview = in.readString();
+        releaseDate = in.readString();
+        userRating = in.readString();
+        isFavourite = in.readByte() != 0;
+        if (in.readByte() == 0) {
+            favouritesDbId = null;
+        } else {
+            favouritesDbId = in.readLong();
+        }
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
+    public Long getFavouritesDbId() {
+        return favouritesDbId;
+    }
+
+    public void setFavouritesDbId(Long favouritesDbId) {
+        this.favouritesDbId = favouritesDbId;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
     public String getOriginalTitle() {
         return originalTitle;
     }
@@ -112,5 +160,27 @@ public class Movie implements Serializable {
         result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
         result = 31 * result + (userRating != null ? userRating.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(originalTitle);
+        parcel.writeString(relativePosterPath);
+        parcel.writeString(overview);
+        parcel.writeString(releaseDate);
+        parcel.writeString(userRating);
+        parcel.writeByte((byte) (isFavourite? 1: 0));
+        if (favouritesDbId != null) {
+            parcel.writeLong(favouritesDbId);
+        } else {
+            parcel.writeLong(0);
+        }
     }
 }

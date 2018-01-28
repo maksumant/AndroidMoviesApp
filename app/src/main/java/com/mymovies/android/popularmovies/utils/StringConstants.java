@@ -12,4 +12,6 @@ public class StringConstants {
     public static final String SORT_BY_POPULARITY_API_PATH = "popular";
 
     public static final String SORT_BY_TOP_RATED_API_PATH = "top_rated";
+
+    public static final String SORT_BY_FAVOURITES = "favourites";
 }

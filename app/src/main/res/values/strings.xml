@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Popular Movies</string>
-    <string name="movie_detail">Movie Detail</string>
+    <string name="movie_detail">Movie Details</string>
+    <string name="movie_reviews">Movie Reviews</string>
 
     <string name="releaseDate">Release date: </string>
     <string name="ratingsOutOf">/10</string>
@@ -8,7 +9,11 @@
     <string name="sort_by">Sort By</string>
     <string name="sort_by_popularity">Popularity</string>
     <string name="sort_by_rating">Rating</string>
+    <string name="reviews">Reviews</string>
+    <string name="favourites">Favourites</string>
 
    <!-- Error messages -->
     <string name="error_message">Something went wrong while fetching data, please try again.</string>
+    <string name="no_reviews_message">It seems that there are no reviews for this movie.</string>
+    <string name="no_favourites_message">Looks like you have not added any favourites yet.</string>
 </resources>

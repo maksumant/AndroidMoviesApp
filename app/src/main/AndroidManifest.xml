@@ -19,8 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieDetailsActivity" android:label="@string/movie_detail">
+        <activity android:name=".MovieDetailsActivity" android:label="@string/movie_detail"  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
+        <activity android:name=".MovieReviewsActivity" android:label="@string/movie_reviews">
+        </activity>
+        <provider
+            android:authorities="com.mymovies.android.popularmovies"
+            android:name="com.mymovies.android.popularmovies.data.FavouritesContentProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
