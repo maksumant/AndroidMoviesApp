@@ -35,7 +35,7 @@ public class NetworkUtils {
 
 
     //TODO: Enter your API KEY before running app.
-    private static final String API_KEY_VALUE = "<<api keu >>";
+    private static final String API_KEY_VALUE = "<< API KEY >>";
 
     /**
      * Builds the URL used to talk to the movies DB API server using a sort by parameter.
