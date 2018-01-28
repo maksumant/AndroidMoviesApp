@@ -138,7 +138,7 @@ public class MovieReviewsActivity extends AppCompatActivity implements  LoaderMa
             reviewText.setText(review.getContent());
 
             TextView authorText = new TextView(this);
-            authorText.setText(review.getAuthor());
+            authorText.setText(this.getString(R.string.by) + " " + review.getAuthor());
             authorText.setGravity(Gravity.RIGHT);
 
             View view = new View(this);

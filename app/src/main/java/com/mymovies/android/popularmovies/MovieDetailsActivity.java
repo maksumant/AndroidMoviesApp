@@ -363,7 +363,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements  LoaderMa
             intent.putExtra(StringConstants.EXTRA_CONTENT_NAME, this.selectedMovie);
             startActivity(intent);
         } else if (selectedMenuItem == android.R.id.home) {
-            System.out.println("HOME PRESSED ########");
             finish();
         }
         return super.onOptionsItemSelected(item);

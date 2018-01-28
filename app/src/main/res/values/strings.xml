@@ -11,6 +11,8 @@
     <string name="sort_by_rating">Rating</string>
     <string name="reviews">Reviews</string>
     <string name="favourites">Favourites</string>
+    <string name="by">By</string>
+
 
    <!-- Error messages -->
     <string name="error_message">Something went wrong while fetching data, please try again.</string>
