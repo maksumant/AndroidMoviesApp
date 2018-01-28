@@ -28,19 +28,26 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by makrandsumant on 21/01/18.
  */
-
 public class MovieReviewsActivity extends AppCompatActivity implements  LoaderManager.LoaderCallbacks<List<MovieReview>>  {
     private Movie selectedMovie;
     private final static int MOVIE_REVIEWS_LOADER = 31;
     private List<MovieReview> reviews;
-    private ProgressBar mProgressBar;
-    private TextView mErrorMessageDisplay;
-    private TextView mNoReviewsMessageDisplay;
-    private ScrollView mMovieReviewsView;
-    private LinearLayout mReviewsLayout;
+    @BindView(R.id.pb_loading_indicator)
+    ProgressBar mProgressBar;
+    @BindView(R.id.tv_error_message)
+    TextView mErrorMessageDisplay;
+    @BindView(R.id.tv_no_reviews_found)
+    TextView mNoReviewsMessageDisplay;
+    @BindView(R.id.sv_movie_reviews)
+    ScrollView mMovieReviewsView;
+    @BindView(R.id.ll_review_items)
+    LinearLayout mReviewsLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,11 +56,7 @@ public class MovieReviewsActivity extends AppCompatActivity implements  LoaderMa
         Intent intentThatStartedThisActivity = getIntent();
 
         if (intentThatStartedThisActivity.hasExtra(StringConstants.EXTRA_CONTENT_NAME)) {
-            mProgressBar = (ProgressBar) findViewById(R.id.pb_loading_indicator);
-            mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message);
-            mNoReviewsMessageDisplay = (TextView) findViewById(R.id.tv_no_reviews_found);
-            mMovieReviewsView = (ScrollView) findViewById(R.id.sv_movie_reviews);
-            mReviewsLayout = (LinearLayout) findViewById(R.id.ll_review_items);
+            ButterKnife.bind(this);
 
             this.selectedMovie = (Movie) intentThatStartedThisActivity.getParcelableExtra(StringConstants.EXTRA_CONTENT_NAME);
 

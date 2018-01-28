@@ -42,30 +42,43 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Activity responsible for showing/handling movie detail.
  */
 public class MovieDetailsActivity extends AppCompatActivity implements  LoaderManager.LoaderCallbacks<List<MovieVideo>> {
 
-    private TextView mMovieTitle;
+    @BindView(R.id.tv_movie_title)
+    TextView mMovieTitle;
 
-    private ImageView mMovieThumbnail;
+    @BindView(R.id.iv_movie_thumbnail)
+    ImageView mMovieThumbnail;
 
-    private TextView mMovieOverview;
+    @BindView(R.id.tv_overview)
+    TextView mMovieOverview;
 
-    private TextView mMovieRatings;
+    @BindView(R.id.tv_user_rating)
+    TextView mMovieRatings;
 
-    private TextView mMovieReleaseDate;
+    @BindView(R.id.tv_release_date)
+    TextView mMovieReleaseDate;
 
-    private ToggleButton mFavouriteButton;
+    @BindView(R.id.b_is_favourite)
+    ToggleButton mFavouriteButton;
 
-    private TextView mErrorMessageDisplay;
+    @BindView(R.id.tv_error_message)
+    TextView mErrorMessageDisplay;
 
-    private ProgressBar mProgressBar;
+    @BindView(R.id.pb_loading_indicator)
+    ProgressBar mProgressBar;
 
-    private ScrollView mMovieDetailsView;
+    @BindView(R.id.sv_movie_details)
+    ScrollView mMovieDetailsView;
 
-    private LinearLayout mTrailersLayout;
+    @BindView(R.id.ll_trailer_items)
+    LinearLayout mTrailersLayout;
 
     private final static int MOVIE_VIDEOS_LOADER = 24;
 
@@ -76,8 +89,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements  LoaderMa
     private ArrayList<MovieVideo> videosData;
 
     private Movie selectedMovie;
-
-    private SQLiteDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +106,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements  LoaderMa
                 this.selectedMovie = (Movie) intentThatStartedThisActivity.getParcelableExtra(StringConstants.EXTRA_CONTENT_NAME);
             }
 
-            mMovieTitle = (TextView) findViewById(R.id.tv_movie_title);
-            mMovieThumbnail = (ImageView) findViewById(R.id.iv_movie_thumbnail);
-            mMovieOverview = (TextView) findViewById(R.id.tv_overview);
-            mMovieRatings = (TextView) findViewById(R.id.tv_user_rating);
-            mMovieReleaseDate = (TextView) findViewById(R.id.tv_release_date);
-            mFavouriteButton = (ToggleButton) findViewById(R.id.b_is_favourite);
-            mProgressBar = (ProgressBar) findViewById(R.id.pb_loading_indicator);
-            mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message);
-            mMovieDetailsView = (ScrollView) findViewById(R.id.sv_movie_details);
-            mTrailersLayout = (LinearLayout) findViewById(R.id.ll_trailer_items);
-
+            ButterKnife.bind(this);
 
             mMovieTitle.setText(selectedMovie.getOriginalTitle());
             mMovieReleaseDate.setText(this.getString(R.string.releaseDate) + selectedMovie.getReleaseDate());
@@ -117,7 +118,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements  LoaderMa
             String posterURL = NetworkUtils.buildUrlForImage(selectedMovie.getRelativePosterPath()).toString();
             Picasso.with(this).load(URLDecoder.decode(posterURL)).into(mMovieThumbnail);
 
-            mDb = new FavouritesDbHelper(this).getWritableDatabase();
             this.checkIfMovieIsFavourite(this.selectedMovie);
             this.initializeFavouritesButtonOnUI(selectedMovie.isFavourite());
 

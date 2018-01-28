@@ -31,17 +31,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements MovieListAdapter.MovieListAdapterOnClickHandler, LoaderManager.LoaderCallbacks<Movie[]> {
 
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.rv_movie_posters)
+    RecyclerView mRecyclerView;
 
     private MovieListAdapter mMovieListAdapter;
 
-    private ProgressBar mProgressBar;
+    @BindView(R.id.pb_loading_indicator)
+    ProgressBar mProgressBar;
 
-    private TextView mErrorMessageDisplay;
+    @BindView(R.id.tv_error_message)
+    TextView mErrorMessageDisplay;
 
-    private TextView mNoFavouritesMessageDisplay;
+    @BindView(R.id.tv_no_favourites_found)
+    TextView mNoFavouritesMessageDisplay;
 
     private SQLiteDatabase mDb;
 
@@ -52,11 +59,7 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        mRecyclerView = findViewById(R.id.rv_movie_posters);
-        mProgressBar = findViewById(R.id.pb_loading_indicator);
-        mErrorMessageDisplay = findViewById(R.id.tv_error_message);
-        mNoFavouritesMessageDisplay = findViewById(R.id.tv_no_favourites_found);
+        ButterKnife.bind(this);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
