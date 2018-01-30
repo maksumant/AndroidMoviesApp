@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,14 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 
     private static final int MOVIE_DATA_LOADER = 23;
 
+    private static final String SAVED_LAYOUT_MANAGER = "savedLayoutManager";
+
+    private static final String SAVED_SORT_ORDER = "savedSortOrder";
+
+    private Parcelable mLayoutManagerSavedState = null;
+
+    private String mSortBy = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +80,14 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 
         mRecyclerView.setAdapter(mMovieListAdapter);
 
-        loadMoviesData(StringConstants.SORT_BY_TOP_RATED_API_PATH);
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVED_SORT_ORDER)) {
+            mSortBy = savedInstanceState.getString(SAVED_SORT_ORDER);
+        }
+        if (mSortBy == null) {
+            loadMoviesData(StringConstants.SORT_BY_TOP_RATED_API_PATH);
+        } else {
+            loadMoviesData(mSortBy);
+        }
     }
 
     /**
@@ -179,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
         } else {
             showMoviesDataView();
             mMovieListAdapter.setMovies(movies);
+            restoreLayoutManagerPosition();
         }
 
     }
@@ -225,12 +242,37 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
         int selectedMenuItem = item.getItemId();
         Context context = MainActivity.this;
         if (selectedMenuItem == R.id.submenu_sort_b_popularity) {
+            this.mSortBy = StringConstants.SORT_BY_POPULARITY_API_PATH;
             loadMoviesData(StringConstants.SORT_BY_POPULARITY_API_PATH);
         } else if (selectedMenuItem == R.id.submenu_sort_by_rating) {
+            this.mSortBy = StringConstants.SORT_BY_TOP_RATED_API_PATH;
             loadMoviesData(StringConstants.SORT_BY_TOP_RATED_API_PATH);
         } else if (selectedMenuItem == R.id.menu_favourites) {
+            this.mSortBy = StringConstants.SORT_BY_FAVOURITES;
             loadMoviesData(StringConstants.SORT_BY_FAVOURITES);
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(SAVED_LAYOUT_MANAGER, mRecyclerView.getLayoutManager().onSaveInstanceState());
+        outState.putString(SAVED_SORT_ORDER, mSortBy);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState.containsKey(SAVED_LAYOUT_MANAGER)) {
+            mLayoutManagerSavedState = savedInstanceState.getParcelable(SAVED_LAYOUT_MANAGER);
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    private void restoreLayoutManagerPosition() {
+        if (mLayoutManagerSavedState != null) {
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(mLayoutManagerSavedState);
+        }
+    }
+
 }
